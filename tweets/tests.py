@@ -24,7 +24,6 @@ class TestHomeView(TestCase):
 
 #     def test_failure_post_with_too_long_content(self):
 
-
 # class TestTweetDetailView(TestCase):
 #     def test_success_get(self):
 

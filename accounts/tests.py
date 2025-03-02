@@ -195,7 +195,6 @@ class TestSignupView(TestCase):
 
 #     def test_failure_post_with_empty_password(self):
 
-
 # class TestLogoutView(TestCase):
 #     def test_success_post(self):
 
