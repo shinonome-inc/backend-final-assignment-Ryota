@@ -18,11 +18,15 @@ class TestSignupView(TestCase):
         valid_data = {
             "username": "testuser",
             "email": "test@test.com",
-            "password1": "testpassword",
+            "password1": "testpassWord",
             "password2": "testpassword",
         }
 
         response = self.client.post(self.url, valid_data)
+
+        form = response.context["form"]
+
+        print(form.errors)
 
         # 1の確認 = tweets/homeにリダイレクトすること
         self.assertRedirects(
@@ -33,6 +37,11 @@ class TestSignupView(TestCase):
         )
         # 2の確認 = ユーザーが作成されること
         self.assertTrue(User.objects.filter(username=valid_data["username"]).exists())
+
+        user = User.objects.get(username=valid_data["username"])
+        print(f"Created user: {user}")
+        self.client.force_login(user)
+
         # 3の確認 = ログイン状態になること
         self.assertIn(SESSION_KEY, self.client.session)
 
