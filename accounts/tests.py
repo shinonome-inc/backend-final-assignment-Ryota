@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth import SESSION_KEY, get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -26,7 +25,7 @@ class TestSignupView(TestCase):
         # 1の確認 = tweets/homeにリダイレクトすること
         self.assertRedirects(
             response,
-            settings.LOGIN_REDIRECT_URL,
+            reverse("tweets:home"),
             status_code=302,
             target_status_code=200,
         )
