@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-from django.urls import reverse_lazy
-
-AUTH_USER_MODEL = "accounts.User"
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -129,5 +125,8 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = reverse_lazy("accounts:login")
-LOGIN_REDIRECT_URL = reverse_lazy("tweets:home")
+LOGIN_URL = "accounts:login"
+
+LOGIN_REDIRECT_URL = "tweets:home"
+
+LOGOUT_REDIRECT_URL = "accounts:login"
