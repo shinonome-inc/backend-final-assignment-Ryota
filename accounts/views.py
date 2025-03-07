@@ -1,11 +1,13 @@
 # from django.shortcuts import render
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DetailView
 
 from .forms import SignupForm
+
+User = get_user_model()
 
 
 class SignupView(CreateView):
@@ -21,9 +23,10 @@ class SignupView(CreateView):
         login(self.request, user)
         return response
 
-    def get_success_url(self):
-        return settings.LOGIN_REDIRECT_URL
 
-
-class UserProfileView(LoginRequiredMixin, TemplateView):
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = User
     template_name = "accounts/user_profile.html"
+    context_object_name = "profile_user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
